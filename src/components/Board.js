@@ -6,17 +6,10 @@ const Board = ({ board, onCellClick, onCellRightClick }) => {
     return <div>Loading board...</div>;
   }
 
-  const boardStyle = {
-    display: 'grid',
-    gridTemplateColumns: `repeat(${board[0].length}, 30px)`,
-    gap: '1px',
-    padding: '10px',
-    backgroundColor: '#999',
-    border: '2px solid #333',
-  };
-
   return (
-    <div style={boardStyle}>
+    <div className="board" style={{
+      gridTemplateColumns: `repeat(${board[0].length}, auto)`
+    }}>
       {board.map((row, y) =>
         row.map((cell, x) => (
           <Cell

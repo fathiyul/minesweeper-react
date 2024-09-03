@@ -69,18 +69,16 @@ const App = () => {
       </header>
       <main>
         <div className="game-info">
-          <div>Mines: {mineCount - flagCount}</div>
-          <div>Time: {time}</div>
-          <div>Status: {gameStatus}</div>
+          <div>💣 {mineCount - flagCount}</div>
+          <div>⏱️ {time}</div>
+          <div>{gameStatus.toUpperCase()}</div>
         </div>
-        {board.length > 0 && board[0].length > 0 ? (
+        {board.length > 0 && (
           <Board 
             board={board} 
             onCellClick={handleCellClick}
             onCellRightClick={handleCellRightClick}
           />
-        ) : (
-          <div>Initializing board...</div>
         )}
         <div className="controls">
           <button onClick={startNewGame}>New Game</button>
@@ -90,6 +88,11 @@ const App = () => {
             <option value="30">Hard (30 mines)</option>
           </select>
         </div>
+        {(gameStatus === 'won' || gameStatus === 'lost') && (
+          <div className="game-over">
+            {gameStatus === 'won' ? 'You Won!' : 'Game Over!'}
+          </div>
+        )}
       </main>
     </div>
   );

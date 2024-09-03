@@ -9,25 +9,26 @@ const Cell = ({ cell, onClick, onContextMenu }) => {
     return cell.adjacentMines;
   };
 
-  const cellStyle = {
-    width: '30px',
-    height: '30px',
-    border: '1px solid #999',
-    backgroundColor: cell.isRevealed ? '#ccc' : '#fff',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    cursor: 'pointer',
-    fontWeight: 'bold',
+  const getCellClass = () => {
+    let className = 'cell';
+    if (cell.isRevealed) className += ' revealed';
+    if (cell.isRevealed && cell.isMine) className += ' mine';
+    return className;
+  };
+
+  const getContentStyle = () => {
+    if (!cell.isRevealed || cell.isMine || cell.isFlagged) return {};
+    const colors = ['blue', 'green', 'red', 'purple', 'maroon', 'turquoise', 'black', 'gray'];
+    return { color: colors[cell.adjacentMines - 1] };
   };
 
   return (
     <div
-      style={cellStyle}
+      className={getCellClass()}
       onClick={onClick}
       onContextMenu={onContextMenu}
     >
-      {cellContent()}
+      <span style={getContentStyle()}>{cellContent()}</span>
     </div>
   );
 };
