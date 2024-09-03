@@ -4,7 +4,7 @@ This project is a modern implementation of the classic Minesweeper game using Re
 
 ## Screenshot
 
-![Minesweeper Game Screenshot](./screenshots/minesweeper-screenshot.png)
+![Minesweeper Game Screenshot](./assets/minesweeper.png)
 
 ## Features
 
