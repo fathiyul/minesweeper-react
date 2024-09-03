@@ -73,11 +73,15 @@ const App = () => {
           <div>Time: {time}</div>
           <div>Status: {gameStatus}</div>
         </div>
-        <Board 
-          board={board} 
-          onCellClick={handleCellClick}
-          onCellRightClick={handleCellRightClick}
-        />
+        {board.length > 0 && board[0].length > 0 ? (
+          <Board 
+            board={board} 
+            onCellClick={handleCellClick}
+            onCellRightClick={handleCellRightClick}
+          />
+        ) : (
+          <div>Initializing board...</div>
+        )}
         <div className="controls">
           <button onClick={startNewGame}>New Game</button>
           <select onChange={(e) => handleDifficultyChange(Number(e.target.value))}>

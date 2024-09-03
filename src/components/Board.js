@@ -2,6 +2,10 @@ import React from 'react';
 import Cell from './Cell';
 
 const Board = ({ board, onCellClick, onCellRightClick }) => {
+  if (!board || board.length === 0 || board[0].length === 0) {
+    return <div>Loading board...</div>;
+  }
+
   const boardStyle = {
     display: 'grid',
     gridTemplateColumns: `repeat(${board[0].length}, 30px)`,
