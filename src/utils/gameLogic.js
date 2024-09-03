@@ -1,32 +1,35 @@
-export function createBoard(width, height, mines) {
-  let board = Array(height).fill().map(() => Array(width).fill({
+export function createBoard(width, height) {
+  return Array(height).fill().map(() => Array(width).fill().map(() => ({
     isMine: false,
     isRevealed: false,
     isFlagged: false,
     adjacentMines: 0
-  }));
-  
-  // Place mines randomly
+  })));
+}
+
+export function placeMines(board, mines, firstClickX, firstClickY) {
+  const width = board[0].length;
+  const height = board.length;
   let minesPlaced = 0;
+
   while (minesPlaced < mines) {
     const x = Math.floor(Math.random() * width);
     const y = Math.floor(Math.random() * height);
-    if (!board[y][x].isMine) {
-      board[y][x] = { ...board[y][x], isMine: true };
+
+    // Ensure we don't place a mine on the first clicked cell or its neighbors
+    if (!board[y][x].isMine && (Math.abs(x - firstClickX) > 1 || Math.abs(y - firstClickY) > 1)) {
+      board[y][x].isMine = true;
       minesPlaced++;
     }
   }
-  
+
   // Calculate adjacent mines
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
-      board[y][x] = {
-        ...board[y][x],
-        adjacentMines: countAdjacentMines(board, x, y)
-      };
+      board[y][x].adjacentMines = countAdjacentMines(board, x, y);
     }
   }
-  
+
   return board;
 }
 

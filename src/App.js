@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Board from './components/Board';
-import { createBoard, revealCell, toggleFlag, checkWin, checkLoss } from './utils/gameLogic';
+import { createBoard, placeMines, revealCell, toggleFlag, checkWin, checkLoss } from './utils/gameLogic';
 import './styles/Game.css';
+
+import clickSound from './sounds/click.wav';
+import flagSound from './sounds/flag.wav';
+import gameoverSound from './sounds/gameover.wav';
 
 const App = () => {
   const [board, setBoard] = useState([]);
@@ -9,6 +13,11 @@ const App = () => {
   const [mineCount, setMineCount] = useState(10);
   const [flagCount, setFlagCount] = useState(0);
   const [time, setTime] = useState(0);
+  const [isFirstClick, setIsFirstClick] = useState(true);
+
+  const playSound = (sound) => {
+    new Audio(sound).play();
+  };
 
   const startNewGame = useCallback(() => {
     const newBoard = createBoard(10, 10, mineCount);
@@ -16,6 +25,7 @@ const App = () => {
     setGameStatus('ongoing');
     setFlagCount(0);
     setTime(0);
+    setIsFirstClick(true);
   }, [mineCount]);
 
   useEffect(() => {
@@ -35,13 +45,23 @@ const App = () => {
   const handleCellClick = (x, y) => {
     if (gameStatus !== 'ongoing') return;
 
-    const newBoard = revealCell([...board], x, y);
+    let newBoard = [...board];
+
+    if (isFirstClick) {
+      newBoard = placeMines(newBoard, mineCount, x, y);
+      setIsFirstClick(false);
+    }
+
+    newBoard = revealCell(newBoard, x, y);
     setBoard(newBoard);
+    playSound(clickSound);
 
     if (checkLoss(newBoard)) {
       setGameStatus('lost');
+      playSound(gameoverSound);
     } else if (checkWin(newBoard)) {
       setGameStatus('won');
+      playSound(gameoverSound);
     }
   };
 
@@ -50,6 +70,7 @@ const App = () => {
 
     const newBoard = toggleFlag([...board], x, y);
     setBoard(newBoard);
+    playSound(flagSound);
     
     const newFlagCount = newBoard[y][x].isFlagged 
       ? flagCount + 1 
