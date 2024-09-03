@@ -103,3 +103,20 @@ select:hover {
     font-size: 24px;
     z-index: 10;
 }
+
+.high-scores {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.high-scores h2 {
+    margin-top: 0;
+    color: #4a4a4a;
+}
+
+.high-scores p {
+    margin: 5px 0;
+    font-weight: bold;
+}

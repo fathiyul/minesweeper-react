@@ -14,19 +14,23 @@ const App = () => {
   const [flagCount, setFlagCount] = useState(0);
   const [time, setTime] = useState(0);
   const [isFirstClick, setIsFirstClick] = useState(true);
+  const [highScores, setHighScores] = useState(() => {
+    const saved = localStorage.getItem('minesweeperHighScores');
+    return saved ? JSON.parse(saved) : { easy: Infinity, medium: Infinity, hard: Infinity };
+  });
 
   const playSound = (sound) => {
     new Audio(sound).play();
   };
 
   const startNewGame = useCallback(() => {
-    const newBoard = createBoard(10, 10, mineCount);
+    const newBoard = createBoard(10, 10);
     setBoard(newBoard);
     setGameStatus('ongoing');
     setFlagCount(0);
     setTime(0);
     setIsFirstClick(true);
-  }, [mineCount]);
+  }, []);
 
   useEffect(() => {
     startNewGame();
@@ -62,6 +66,7 @@ const App = () => {
     } else if (checkWin(newBoard)) {
       setGameStatus('won');
       playSound(gameoverSound);
+      updateHighScore();
     }
   };
 
@@ -81,6 +86,19 @@ const App = () => {
   const handleDifficultyChange = (newMineCount) => {
     setMineCount(newMineCount);
     startNewGame();
+  };
+
+  const updateHighScore = () => {
+    let difficulty;
+    if (mineCount === 10) difficulty = 'easy';
+    else if (mineCount === 20) difficulty = 'medium';
+    else difficulty = 'hard';
+
+    if (time < highScores[difficulty]) {
+      const newHighScores = { ...highScores, [difficulty]: time };
+      setHighScores(newHighScores);
+      localStorage.setItem('minesweeperHighScores', JSON.stringify(newHighScores));
+    }
   };
 
   return (
@@ -108,6 +126,12 @@ const App = () => {
             <option value="20">Medium (20 mines)</option>
             <option value="30">Hard (30 mines)</option>
           </select>
+        </div>
+        <div className="high-scores">
+          <h2>High Scores</h2>
+          <p>Easy: {highScores.easy === Infinity ? '-' : highScores.easy}s</p>
+          <p>Medium: {highScores.medium === Infinity ? '-' : highScores.medium}s</p>
+          <p>Hard: {highScores.hard === Infinity ? '-' : highScores.hard}s</p>
         </div>
         {(gameStatus === 'won' || gameStatus === 'lost') && (
           <div className="game-over">
