@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# React Minesweeper
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a modern implementation of the classic Minesweeper game using React. It features a clean, responsive design with additional enhancements like sound effects and a high score system.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Classic Minesweeper gameplay
+- Three difficulty levels: Easy, Medium, and Hard
+- First-click safety (first clicked cell is never a mine)
+- Sound effects for interactions
+- High score system with localStorage persistence
+- Responsive design for various screen sizes
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run this project locally, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/react-minesweeper.git
+   cd react-minesweeper
+   ```
 
-### `npm test`
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Start the development server:
+   ```
+   npm start
+   ```
 
-### `npm run build`
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to Play
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Click on a cell to reveal it.
+2. Right-click (or long-press on mobile) to flag a cell you suspect contains a mine.
+3. The numbers on the revealed cells indicate how many mines are in the adjacent cells.
+4. Reveal all non-mine cells to win the game.
+5. If you reveal a mine, the game is over.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Game Controls
 
-### `npm run eject`
+- Left-click: Reveal a cell
+- Right-click: Flag/unflag a cell
+- New Game button: Start a new game
+- Difficulty selector: Choose between Easy (10 mines), Medium (20 mines), and Hard (30 mines)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technical Details
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Built with React (Create React App)
+- State management using React Hooks (useState, useEffect, useCallback)
+- Custom game logic for board generation and game mechanics
+- Utilizes localStorage for persisting high scores
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Future Enhancements
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Add animations for cell reveals and game over scenarios
+- Implement a custom difficulty setting
+- Add a dark mode theme
+- Create a leaderboard system with online persistence
 
-## Learn More
+## Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/yourusername/react-minesweeper/issues) if you want to contribute.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is open source and available under the [MIT License](LICENSE).
