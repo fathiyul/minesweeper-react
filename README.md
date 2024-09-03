@@ -2,6 +2,10 @@
 
 This project is a modern implementation of the classic Minesweeper game using React. It features a clean, responsive design with additional enhancements like sound effects and a high score system.
 
+## Screenshot
+
+![Minesweeper Game Screenshot](./screenshots/minesweeper-screenshot.png)
+
 ## Features
 
 - Classic Minesweeper gameplay
